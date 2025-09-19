@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-#NOTE need to create cloud console app, add youtube v3 api, export oauth login desktop app to credentials.json, add ur email to test users and then finally run and login
 import argparse
 import datetime
 import json
@@ -61,6 +60,8 @@ def get_playlists() -> (str("title"),  str("id")):
 			params = params
 		)
 		j = r.json()
+
+		print(json.dumps(j, indent = 2))
 		playlists += j["items"]
 
 		if "nextPageToken" not in j.keys():
@@ -123,7 +124,7 @@ def first_run(config_path: str):
 	for o in [
 		["list_mode", "[First run] Select list mode to use [blacklist / whitelist]: ", "blacklist", "whitelist"],
 		["format", "[First run] Select format to use [tsv / json]: ", "tsv", "json"],
-		["date_mode", "[First run] Do you want to save each backup in a date labelled directory? [yes / no]", "yes", "no"],
+		["date_mode", "[First run] Do you want to save each backup in a date labelled directory? [yes / no]: ", "yes", "no"],
 		# ["subscriptions", "[First run] Do you want to save subscriptions? [yes / no]: ", "yes", "no"],
 	]:
 		if (mode := input(o[1])) not in [o[2], o[3]]:
@@ -152,9 +153,9 @@ def first_run(config_path: str):
 
 if __name__ == "__main__":
 	parser = argparse.ArgumentParser(description = "Back up youtube playlists")
-	parser.add_argument("--config", dest = "config", action = "store", default = expanduser("~/Backups/Youtube/config.json"), type = str, help = "Configuration file")
-	parser.add_argument("--credentials", dest = "credentials", action = "store", default = expanduser("~/Backups/Youtube/"), type = str, help = "Directory where credential files are stored")
-	parser.add_argument("--backup", dest = "backup", action = "store", default = expanduser("~/Backups/Youtube/Playlists"), type = str, help = "Where to store exported data")
+	parser.add_argument("--config", dest = "config", action = "store", default = "config.json", type = str, help = "Configuration file")
+	parser.add_argument("--credentials", dest = "credentials", action = "store", default = "", type = str, help = "Directory where credential files are stored")
+	parser.add_argument("--backup", dest = "backup", action = "store", default = "Playlists", type = str, help = "Where to store exported data")
 	parser.add_argument("-v", "--verbose", dest = "verbose", action = "store_true", help = "Print extra info")
 	args = parser.parse_args()
 
