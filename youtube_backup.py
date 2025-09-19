@@ -61,7 +61,6 @@ def get_playlists() -> (str("title"),  str("id")):
 		)
 		j = r.json()
 
-		print(json.dumps(j, indent = 2))
 		playlists += j["items"]
 
 		if "nextPageToken" not in j.keys():
