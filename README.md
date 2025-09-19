@@ -47,7 +47,7 @@ Doesn't use yt-dlp as that can be unreliable when downloading private playlists
 
 2) Then run: `crontab -e` 
 
-3) And add this line with a correct file path: `0 0 * * * /path/to/youtube_backup.py --config /path/to/config.json --credentials /path/to/credentials --backup`
+3) And add this line with a correct file path: `0 0 * * * /path/to/youtube_backup.py --config /path/to/config.json --credentials /path/to/credentials --backup /path/to/Backup`
 
 ## Issues
 
